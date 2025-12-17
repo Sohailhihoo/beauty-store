@@ -1,13 +1,13 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, Suspense } from 'react';
 import { productAPI } from '@/lib/api';
 import { useProductFilters } from '@/hooks/useProductFilters';
 import ProductCard from '@/components/ProductCard';
 import SearchInput from '@/components/SearchInput';
 import { HiOutlineAdjustments, HiOutlineX } from 'react-icons/hi';
 
-export default function ProductsPage() {
+function ProductsContent() {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [pagination, setPagination] = useState({});
@@ -247,8 +247,8 @@ export default function ProductsPage() {
                       key={pageNum}
                       onClick={() => setFilter('page', pageNum)}
                       className={`w-10 h-10 rounded-lg font-medium transition-colors ${filters.page === pageNum
-                          ? 'bg-pink-600 text-white'
-                          : 'bg-white hover:bg-gray-100'
+                        ? 'bg-pink-600 text-white'
+                        : 'bg-white hover:bg-gray-100'
                         }`}
                     >
                       {pageNum}
@@ -369,5 +369,17 @@ export default function ProductsPage() {
         </div>
       )}
     </div>
+  );
+}
+
+export default function ProductsPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-4 border-pink-500 border-t-transparent"></div>
+      </div>
+    }>
+      <ProductsContent />
+    </Suspense>
   );
 }
