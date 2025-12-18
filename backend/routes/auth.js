@@ -22,7 +22,7 @@ const createSession = async (res, userId) => {
   res.cookie('sessionId', sessionId, {
     httpOnly: true,           // Prevents JavaScript access (XSS protection)
     secure: process.env.NODE_ENV === 'production',  // HTTPS only in production
-    sameSite: 'strict',       // CSRF protection
+    sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax', // Allow cross-domain in production
     maxAge: SESSION_EXPIRY * 1000  // Convert to milliseconds
   });
 };
