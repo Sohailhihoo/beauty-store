@@ -43,6 +43,21 @@ export default function HomePage() {
         return () => window.removeEventListener('mousemove', handleMouseMove);
     }, []);
 
+    const leftVideoRef = useRef(null);
+    const rightVideoRef = useRef(null);
+
+    const handleMouseEnter = (ref) => {
+        if (ref.current) {
+            ref.current.play().catch(e => console.log('Video play failed:', e));
+        }
+    };
+
+    const handleMouseLeave = (ref) => {
+        if (ref.current) {
+            ref.current.pause();
+        }
+    };
+
     return (
         <div className="bg-white">
             {/* Newsletter Popup */}
@@ -77,10 +92,12 @@ export default function HomePage() {
                     href="/beauty"
                     className="relative w-full md:w-1/2 h-1/2 md:h-full overflow-hidden group cursor-none block"
                     aria-label="Shop beauty collection"
+                    onMouseEnter={() => handleMouseEnter(leftVideoRef)}
+                    onMouseLeave={() => handleMouseLeave(leftVideoRef)}
                 >
                     {/* Video Background */}
                     <video
-                        autoPlay
+                        ref={leftVideoRef}
                         loop
                         muted
                         playsInline
@@ -117,10 +134,12 @@ export default function HomePage() {
                     href="/products?productType=accessories"
                     className="relative w-full md:w-1/2 h-1/2 md:h-full overflow-hidden group cursor-none block"
                     aria-label="Shop accessories collection"
+                    onMouseEnter={() => handleMouseEnter(rightVideoRef)}
+                    onMouseLeave={() => handleMouseLeave(rightVideoRef)}
                 >
                     {/* Video Background */}
                     <video
-                        autoPlay
+                        ref={rightVideoRef}
                         loop
                         muted
                         playsInline
