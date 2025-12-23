@@ -244,11 +244,11 @@ export default function HomePage() {
                 </Link>
 
                 {/* Centered Logo */}
-                <div className="absolute left-1/2 top-32 transform -translate-x-1/2 -translate-y-1/2 z-20 pointer-events-none">
+                <div className="absolute left-1/2 top-4 transform -translate-x-1/2 z-20 pointer-events-none">
                     <img
                         src="/images/brand/logo3.png"
                         alt="Ayush Logo"
-                        className="h-40 md:h-52 lg:h-50 w-auto object-contain brightness-110 contrast-110 drop-shadow-[0_4px_30px_rgba(255,255,255,0.8)]"
+                        className="h-16 md:h-32 lg:h-40 w-auto object-contain brightness-110 contrast-110 drop-shadow-[0_4px_30px_rgba(255,255,255,0.8)]"
                         style={{ animation: 'pulse 3s ease-in-out infinite' }}
                     />
                 </div>
