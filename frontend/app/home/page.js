@@ -3,14 +3,13 @@
 import { useEffect, useState, useRef } from 'react';
 import Link from 'next/link';
 import NewsletterPopup from '@/components/NewsletterPopup';
-import BrandsBar from '@/components/BrandsBar';
 
 /**
  * HomePage Component
  * 
  * Main landing page featuring:
  * - Hero section with video background
- * - Brands bar
+ * - Premium luxury styling with gradients
  * 
  * @returns {JSX.Element} The home page component
  */
@@ -44,6 +43,7 @@ export default function HomePage() {
     }, []);
 
     const leftVideoRef = useRef(null);
+    const centerVideoRef = useRef(null);
     const rightVideoRef = useRef(null);
 
     const handleMouseEnter = (ref) => {
@@ -81,17 +81,17 @@ export default function HomePage() {
                 </div>
             )}
 
-            {/* Split-Screen Hero Section */}
+            {/* Split-Screen Hero Section - 3 Panels */}
             <section
                 ref={heroRef}
                 className="relative h-screen min-h-[600px] flex flex-col md:flex-row"
                 aria-label="Hero section"
             >
-                {/* Left Panel - Beauty Collection */}
+                {/* Left Panel - Skincare */}
                 <Link
                     href="/beauty"
-                    className="relative w-full md:w-1/2 h-1/2 md:h-full overflow-hidden group cursor-none block"
-                    aria-label="Shop beauty collection"
+                    className="relative w-full md:w-1/3 h-1/3 md:h-full overflow-hidden group cursor-none block"
+                    aria-label="Shop skincare collection"
                     onMouseEnter={() => handleMouseEnter(leftVideoRef)}
                     onMouseLeave={() => handleMouseLeave(leftVideoRef)}
                 >
@@ -101,38 +101,100 @@ export default function HomePage() {
                         loop
                         muted
                         playsInline
-                        className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                        aria-label="Beauty collection video"
+                        className="absolute inset-0 w-full h-full object-cover transition-all duration-1000 group-hover:scale-110 brightness-[0.3] group-hover:brightness-110 grayscale group-hover:grayscale-0"
+                        aria-label="Skincare collection video"
+                    >
+                        <source src="/videos/hero-video.mp4" type="video/mp4" />
+                        Your browser does not support the video tag.
+                    </video>
+
+                    {/* Grey Overlay */}
+                    <div className="absolute inset-0 bg-slate-800/80 group-hover:bg-slate-700/60 transition-all duration-700" aria-hidden="true"></div>
+
+                    {/* Shimmer Effect */}
+                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-in-out" aria-hidden="true"></div>
+
+                    {/* Content */}
+                    <div className="absolute inset-0 flex flex-col justify-end items-center text-center px-4 md:px-6 lg:px-8 pb-8 md:pb-12 pointer-events-none">
+                        <div className="max-w-md relative z-10">
+                            {/* Decorative Line */}
+                            <div className="w-12 h-px bg-gradient-to-r from-transparent via-gray-300/60 to-transparent mx-auto mb-6 group-hover:w-20 transition-all duration-500"></div>
+
+                            <h2 className="text-2xl md:text-3xl lg:text-4xl font-black tracking-widest text-white mb-2 drop-shadow-lg group-hover:tracking-[0.3em] transition-all duration-700">
+                                <span className="block text-white">Skincare</span>
+                            </h2>
+
+                            <p className="text-sm text-gray-200/70 tracking-[0.2em] uppercase mt-4 opacity-0 group-hover:opacity-100 transition-all duration-500">
+                                Discover Collection
+                            </p>
+
+                            {/* Animated Arrow */}
+                            <div className="mt-6 opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-500">
+                                <span className="inline-block text-gray-200 text-2xl group-hover:translate-x-2 transition-transform duration-300">→</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Border Glow Effect */}
+                    <div className="absolute inset-0 border border-white/0 group-hover:border-white/20 transition-all duration-500"></div>
+                </Link>
+
+                {/* Center Panel - SkinBooster */}
+                <Link
+                    href="/products"
+                    className="relative w-full md:w-1/3 h-1/3 md:h-full overflow-hidden group cursor-none block"
+                    aria-label="Shop new arrivals"
+                    onMouseEnter={() => handleMouseEnter(centerVideoRef)}
+                    onMouseLeave={() => handleMouseLeave(centerVideoRef)}
+                >
+                    {/* Video Background */}
+                    <video
+                        ref={centerVideoRef}
+                        loop
+                        muted
+                        playsInline
+                        className="absolute inset-0 w-full h-full object-cover transition-all duration-1000 group-hover:scale-110 brightness-[0.3] group-hover:brightness-110 grayscale group-hover:grayscale-0"
+                        aria-label="New arrivals video"
                     >
                         <source src="/videos/2.mp4" type="video/mp4" />
                         Your browser does not support the video tag.
                     </video>
 
-                    {/* Dark Overlay */}
-                    <div className="absolute inset-0 bg-black/80 group-hover:bg-black/60 transition-colors duration-500" aria-hidden="true"></div>
+                    {/* Grey Overlay */}
+                    <div className="absolute inset-0 bg-slate-700/70 group-hover:bg-slate-600/50 transition-all duration-700" aria-hidden="true"></div>
+
+                    {/* Shimmer Effect */}
+                    <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/5 to-transparent -translate-y-full group-hover:translate-y-full transition-transform duration-1000 ease-in-out" aria-hidden="true"></div>
 
                     {/* Content */}
-                    <div className="absolute inset-0 flex flex-col justify-end items-center text-center px-6 md:px-8 lg:px-12 pb-16 md:pb-24 pointer-events-none">
-                        <div className="max-w-lg relative z-10">
-                            <h2 className="text-4xl md:text-5xl lg:text-6xl font-thin tracking-tight text-white mb-4 animate-fade-in drop-shadow-lg font-serif group-hover:tracking-wider transition-all duration-500">
-                                Beauty Collection
+                    <div className="absolute inset-0 flex flex-col justify-end items-center text-center px-4 md:px-6 lg:px-8 pb-8 md:pb-12 pointer-events-none">
+                        <div className="max-w-md relative z-10">
+                            {/* Decorative Line */}
+                            <div className="w-12 h-px bg-gradient-to-r from-transparent via-gray-300/60 to-transparent mx-auto mb-6 group-hover:w-20 transition-all duration-500"></div>
+
+                            <h2 className="text-2xl md:text-3xl lg:text-4xl font-black tracking-widest text-white mb-2 drop-shadow-lg group-hover:tracking-[0.3em] transition-all duration-700">
+                                <span className="block text-gray-100">SkinBooster</span>
                             </h2>
-                            <p className="text-lg md:text-xl text-white/90 font-light tracking-wide drop-shadow-md group-hover:text-white transition-colors duration-300">
-                                Skincare & Makeup essentials
+
+                            <p className="text-sm text-gray-200/70 tracking-[0.2em] uppercase mt-4 opacity-0 group-hover:opacity-100 transition-all duration-500">
+                                View Products
                             </p>
+
                             {/* Animated Arrow */}
-                            <div className="mt-8 opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-500">
-                                <span className="text-white text-3xl animate-pulse">→</span>
+                            <div className="mt-6 opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-500">
+                                <span className="inline-block text-gray-200 text-2xl group-hover:translate-x-2 transition-transform duration-300">→</span>
                             </div>
                         </div>
                     </div>
 
+                    {/* Border Glow Effect */}
+                    <div className="absolute inset-0 border border-white/0 group-hover:border-white/20 transition-all duration-500"></div>
                 </Link>
 
                 {/* Right Panel - Accessories */}
                 <Link
                     href="/products?productType=accessories"
-                    className="relative w-full md:w-1/2 h-1/2 md:h-full overflow-hidden group cursor-none block"
+                    className="relative w-full md:w-1/3 h-1/3 md:h-full overflow-hidden group cursor-none block"
                     aria-label="Shop accessories collection"
                     onMouseEnter={() => handleMouseEnter(rightVideoRef)}
                     onMouseLeave={() => handleMouseLeave(rightVideoRef)}
@@ -143,73 +205,56 @@ export default function HomePage() {
                         loop
                         muted
                         playsInline
-                        className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                        className="absolute inset-0 w-full h-full object-cover transition-all duration-1000 group-hover:scale-110 brightness-[0.3] group-hover:brightness-110 grayscale group-hover:grayscale-0"
                         aria-label="Accessories collection video"
                     >
-                        <source src="/videos/3.mov" type="video/mp4" />
+                        <source src="/videos/hero-video.mp4" type="video/mp4" />
                         Your browser does not support the video tag.
                     </video>
 
-                    {/* Dark Overlay */}
-                    <div className="absolute inset-0 bg-black/80 group-hover:bg-black/60 transition-colors duration-500" aria-hidden="true"></div>
+                    {/* Grey Overlay */}
+                    <div className="absolute inset-0 bg-slate-800/80 group-hover:bg-slate-700/60 transition-all duration-700" aria-hidden="true"></div>
+
+                    {/* Shimmer Effect */}
+                    <div className="absolute inset-0 bg-gradient-to-l from-transparent via-white/5 to-transparent translate-x-full group-hover:-translate-x-full transition-transform duration-1000 ease-in-out" aria-hidden="true"></div>
 
                     {/* Content */}
-                    <div className="absolute inset-0 flex flex-col justify-end items-center text-center px-6 md:px-8 lg:px-12 pb-16 md:pb-24 pointer-events-none">
-                        <div className="max-w-lg relative z-10">
-                            <h2 className="text-4xl md:text-5xl lg:text-6xl font-thin tracking-tight text-white mb-4 animate-fade-in drop-shadow-lg font-serif group-hover:tracking-wider transition-all duration-500">
-                                Accessories
+                    <div className="absolute inset-0 flex flex-col justify-end items-center text-center px-4 md:px-6 lg:px-8 pb-8 md:pb-12 pointer-events-none">
+                        <div className="max-w-md relative z-10">
+                            {/* Decorative Line */}
+                            <div className="w-12 h-px bg-gradient-to-r from-transparent via-gray-300/60 to-transparent mx-auto mb-6 group-hover:w-20 transition-all duration-500"></div>
+
+                            <h2 className="text-2xl md:text-3xl lg:text-4xl font-black tracking-widest text-white mb-2 drop-shadow-lg group-hover:tracking-[0.3em] transition-all duration-700">
+                                <span className="block text-white">Accessories</span>
                             </h2>
-                            <p className="text-lg md:text-xl text-white/90 font-light tracking-wide drop-shadow-md group-hover:text-white transition-colors duration-300">
-                                Complete your look
+
+                            <p className="text-sm text-gray-200/70 tracking-[0.2em] uppercase mt-4 opacity-0 group-hover:opacity-100 transition-all duration-500">
+                                Shop Now
                             </p>
+
                             {/* Animated Arrow */}
-                            <div className="mt-8 opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-500">
-                                <span className="text-white text-3xl animate-pulse">→</span>
+                            <div className="mt-6 opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-500">
+                                <span className="inline-block text-gray-200 text-2xl group-hover:translate-x-2 transition-transform duration-300">→</span>
                             </div>
                         </div>
                     </div>
 
+                    {/* Border Glow Effect */}
+                    <div className="absolute inset-0 border border-white/0 group-hover:border-white/20 transition-all duration-500"></div>
                 </Link>
 
                 {/* Centered Logo */}
-                <div className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 z-20 pointer-events-none">
+                <div className="absolute left-1/2 top-32 transform -translate-x-1/2 -translate-y-1/2 z-20 pointer-events-none">
                     <img
-                        src="/images/brand/logo2.png"
+                        src="/images/brand/logo3.png"
                         alt="Ayush Logo"
-                        className="h-20 md:h-28 lg:h-36 w-auto object-contain brightness-110 contrast-110 drop-shadow-[0_4px_20px_rgba(255,255,255,1)]"
+                        className="h-40 md:h-52 lg:h-50 w-auto object-contain brightness-110 contrast-110 drop-shadow-[0_4px_30px_rgba(255,255,255,0.8)]"
+                        style={{ animation: 'pulse 3s ease-in-out infinite' }}
                     />
                 </div>
 
             </section>
 
-            {/* Brands We've Worked With */}
-            <BrandsBar title="Trusted By" />
-
-            {/* Newsletter Section */}
-            <section className="py-16 md:py-24 px-6 md:px-12 lg:px-16 bg-[#4a4a4a] text-white">
-                <div className="max-w-2xl mx-auto text-center">
-                    <h2 className="text-2xl md:text-3xl font-light mb-4 tracking-wide">
-                        join the community
-                    </h2>
-                    <p className="text-gray-300 mb-8">
-                        Subscribe for exclusive access, new product launches, and special offers.
-                    </p>
-                    <form className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto" onSubmit={(e) => e.preventDefault()}>
-                        <input
-                            type="email"
-                            placeholder="Enter your email"
-                            className="flex-1 px-6 py-4 bg-transparent border border-white/30 text-white placeholder-gray-400 focus:outline-none focus:border-white transition-colors"
-                            required
-                        />
-                        <button
-                            type="submit"
-                            className="px-8 py-4 bg-white text-[#4a4a4a] text-sm tracking-widest hover:bg-gray-100 transition-colors"
-                        >
-                            SUBSCRIBE
-                        </button>
-                    </form>
-                </div>
-            </section>
         </div>
     );
 }
